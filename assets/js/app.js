@@ -24,4 +24,11 @@ var chartGroup = svg.append("g")
 d3.csv("data.csv")
     .then(function(data) {
     console.log(data);
+    
+    //Cast data as numbers
+    data.forEach(function(d) {
+        d.income = +d.income;
+        d.smokes = +d.smokes;
     });
+    console.log(data[0]);
+});
