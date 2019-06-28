@@ -21,8 +21,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 
-d3.csv("data.csv")
-    .then(function(data) {
+d3.csv("data.csv").then(function(data) {
     console.log(data);
     
     //Cast data as numbers
@@ -32,13 +31,23 @@ d3.csv("data.csv")
     });
     console.log(data[0]);
 
-     // Create scale functions
-     var xLinearScale = d3.scaleLinear()
-     .domain([40000, d3.max(data, d => d.income)])
-     .range([40000, width]);
+    // Create scale functions
+    var xLinearScale = d3.scaleLinear()
+     .domain([37000, d3.max(data, d => d.income)])
+     .range([0, width]);
 
-     var yLinearScale = d3.scaleLinear()
-     .domain([8, d3.max(data, d => d.smokes)])
-     .range([height, 8]);
+    var yLinearScale = d3.scaleLinear()
+     .domain([8.6, d3.max(data, d => d.smokes)])
+     .range([height, 0]);
 
-    });
+    // Create axis functions
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
+
+
+    // Append axes to chart
+    chartGroup.append("g").attr("transform", `translate(0, ${height})`).call(bottomAxis);
+    chartGroup.append("g").call(leftAxis);
+
+
+});
