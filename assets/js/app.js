@@ -31,4 +31,14 @@ d3.csv("data.csv")
         d.smokes = +d.smokes;
     });
     console.log(data[0]);
-});
+
+     // Create scale functions
+     var xLinearScale = d3.scaleLinear()
+     .domain([40000, d3.max(data, d => d.income)])
+     .range([40000, width]);
+
+     var yLinearScale = d3.scaleLinear()
+     .domain([8, d3.max(data, d => d.smokes)])
+     .range([height, 8]);
+
+    });
