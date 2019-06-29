@@ -60,6 +60,24 @@ d3.csv("data.csv").then(function(data) {
         .attr("fill", "salmon")
         .attr("opacity", ".7");
     
-    //
+    // Initialize tooltip
+    var toolTip = d3.tip()
+      .attr("class", "d3-tip")
+      .offset([80, -60])
+      .html(function(d) {
+        return (`${d.state}<br>Income: ${d.income}<br>% smokers: ${d.smokes}`);
+      });
+    
+    // Call tooltip
+    chartGroup.call(toolTip);
+
+    // Display and hide the tooltip on hover
+    circles.on("mouseover", function(data) {
+        toolTip.show(data, this);
+      })
+        // hover
+        .on("mouseout", function(data, index) {
+          toolTip.hide(data);
+        });
 
 });
