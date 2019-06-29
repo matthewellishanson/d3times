@@ -49,5 +49,17 @@ d3.csv("data.csv").then(function(data) {
     chartGroup.append("g").attr("transform", `translate(0, ${height})`).call(bottomAxis);
     chartGroup.append("g").call(leftAxis);
 
+    // Create circles
+    var circles = chartGroup.selectAll("circle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xLinearScale(d.income))
+        .attr("cy", d => yLinearScale(d.smokes))
+        .attr("r", "10")
+        .attr("fill", "salmon")
+        .attr("opacity", ".7");
+    
+    //
 
 });
